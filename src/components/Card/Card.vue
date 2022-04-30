@@ -1,34 +1,30 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import data from "../../assets/data.json";
+import { formatPrice } from "../../helpers/formatPrice";
+import { Variant } from "../../models";
+import Checkbox from "../Checkbox/Checkbox.vue";
 import "./Card.scss";
+import Select from "../Select/Select.vue";
 
-const variant = ref(data[0].variants[0]);
-const select = ref(data[0].variants[1].select[0]);
+defineProps<{ variant: Variant }>();
+
 </script>
 
 <template>
   <div class="card">
     <div class="head">
       <h1>{{ variant.title }}</h1>
-      <h1 class="price">{{ variant.price_default }}</h1>
+      <h1 class="price">{{ formatPrice(variant.price_default) }}</h1>
     </div>
     <div class="body">
       <div class="description">
         {{ variant.description }}
       </div>
       <div class="options">
-        <div class="checkbox-wrapper">
-          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" />
-          <label for="vehicle1">{{ variant.options[0].title }}</label>
+        <div v-if="variant.options.length" id="v-model-multiple-checkboxes">
+          <Checkbox v-for="option in variant.options" :option="option" />
         </div>
-        <div class="select-wrapper">
-          <p>{{ select.title }}</p>
-          <select >
-            <option value="volvo">{{ select.items[0].title }}</option>
-            <option value="saab">{{ select.items[1].title }}</option>
-            <option value="mercedes">{{ select.items[2].title }}</option>
-          </select>
+        <div v-if="variant.select.length">
+          <Select v-for="select in variant.select" :select="select" />
         </div>
         <button class="button">Выбрано</button>
       </div>

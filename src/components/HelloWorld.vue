@@ -2,16 +2,18 @@
 import { ref } from "vue";
 import data from "../assets/data.json";
 import Block from "./Block/Block.vue";
+import { formatPrice } from "../helpers/formatPrice";
 
 defineProps<{ msg: string }>();
-
-const count = ref(0);
 </script>
 
 <template>
   <div class="wizard">
-    <hr class="divider" />
-    <Block />
+    <Block v-for="block in data" :block="block" />
+    <button>
+      <h2>ИТОГО К ОПЛАТЕ</h2>
+      <h3>{{ formatPrice(3500) }}</h3>
+    </button>
   </div>
 </template>
 
@@ -24,9 +26,18 @@ const count = ref(0);
   align-items: flex-start;
   justify-content: left;
 }
-.divider {
-  border-top: 2px solid #cccccc;
-  margin-bottom: 1rem;
+button {
+  width: 190px;
+  height: 32px;
+  border-radius: 3px;
+  background: #2fcb5a;
+  border: none;
+  color: #f8f8f8;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 a {
   color: #42b983;

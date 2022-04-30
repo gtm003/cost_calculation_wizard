@@ -1,10 +1,10 @@
 .card {
   width: 780px;
-  height: 200px;
   background: #f8f8f8;
   border-left: 6px solid #CCCCCC;
   border-radius: 5px;
   padding: 1.5rem;
+  margin-bottom: 1.5rem;
   .head {
     display: flex;
     align-items: center;
@@ -18,40 +18,16 @@
     font-size: 1.5rem;
     .description {
       white-space: pre-line;
+      width: 540px;
     }
     .options {
       width: 240px;
       display: flex;
       flex-direction: column;
+      justify-content: center;
       align-items: center;
       margin-left: 1.5rem;
       border-left: 1px solid #CCCCCC;
-      .checkbox-wrapper {
-        width: 180px;
-        border: 1px solid #cccccc;
-        border-radius: 3px;
-        height: 2rem;
-        padding: 0.5rem;
-        margin-bottom: 1rem;
-        label {
-          padding-left: 1rem;
-          font-size: 1.5rem;
-          font-weight: normal;
-        }
-      }
-      .select-wrapper {
-        width: 180px;
-        font-size: 1.2rem;
-        border-radius: 3px;
-        padding: 0.5rem;
-        margin-bottom: 1rem;
-        select {
-          width: 180px;
-          height: 32px;
-          padding-left: 1rem;
-          font-size: 1.5rem;
-        }
-      }
       .button {
         width: 190px;
         height: 32px;
@@ -60,6 +36,9 @@
         border: none;
         color: #f8f8f8;
         font-size: 1.5rem;
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
   }

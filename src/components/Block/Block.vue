@@ -1,13 +1,17 @@
 <script setup lang="ts">
 import data from "../../assets/data.json";
+import { Block } from "../../models";
 import Card from "../Card/Card.vue";
 import "./Block.scss";
+
+defineProps<{ block: Block }>();
 </script>
 
 <template>
   <div class="block">
-    <h2>{{ `${data[0].title}:` }}</h2>
-    <Card />
+    <hr class="divider" />
+    <h2>{{ `${block.title}:` }}</h2>
+    <Card v-for="variant in block.variants" :variant="variant" />
   </div>
 </template>
 
