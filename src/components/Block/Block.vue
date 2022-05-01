@@ -1,34 +1,35 @@
 <script setup lang="ts">
-import data from "../../assets/data.json";
+import { mainStore } from "../../store/index";
+import { storeToRefs } from "pinia";
 import { Block } from "../../models";
 import Card from "../Card/Card.vue";
 import "./Block.scss";
 
-defineProps<{ block: Block }>();
+const mainStoreI = mainStore();
+const { activeBlock } = storeToRefs(mainStoreI);
+const { block } = defineProps<{ block: Block }>();
+const title = block.title;
+const handleClick = () => {
+  mainStoreI.activeBlock = title;
+};
 </script>
 
 <template>
   <div class="block">
     <hr class="divider" />
-    <h2>{{ `${block.title}:` }}</h2>
-    <Card v-for="variant in block.variants" :variant="variant" />
+    <h2
+      :class="{ title: true, disabled: activeBlock !== block.title }"
+      @click="handleClick"
+    >
+      {{ `${block.title}:` }}
+    </h2>
+    <div :class="{ hidden: activeBlock !== block.title }">
+      <Card
+        v-for="variant in block.variants"
+        :key="variant.title"
+        :variant="variant"
+        :blockId="block.blockId"
+      />
+    </div>
   </div>
 </template>
-
-<style scoped>
-a {
-  color: #42b983;
-}
-
-label {
-  margin: 0 0.5em;
-  font-weight: bold;
-}
-
-code {
-  background-color: #eee;
-  padding: 2px 4px;
-  border-radius: 4px;
-  color: #304455;
-}
-</style>

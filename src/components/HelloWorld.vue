@@ -1,18 +1,23 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import data from "../assets/data.json";
+import { mainStore } from "../store/index";
 import Block from "./Block/Block.vue";
 import { formatPrice } from "../helpers/formatPrice";
 
-defineProps<{ msg: string }>();
+const { data } = mainStore();
 </script>
 
 <template>
   <div class="wizard">
-    <Block v-for="block in data" :block="block" />
+    <Block v-for="block in data" :key="block.title" :block="block" />
     <button>
       <h2>ИТОГО К ОПЛАТЕ</h2>
-      <h3>{{ formatPrice(3500) }}</h3>
+      <h3>
+        {{
+          formatPrice(
+            data[0].selectedVariant.price + data[1].selectedVariant.price
+          )
+        }}
+      </h3>
     </button>
   </div>
 </template>
@@ -28,8 +33,7 @@ defineProps<{ msg: string }>();
 }
 button {
   width: 190px;
-  height: 32px;
-  border-radius: 3px;
+  border-radius: 5px;
   background: #2fcb5a;
   border: none;
   color: #f8f8f8;
@@ -38,20 +42,5 @@ button {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-}
-a {
-  color: #42b983;
-}
-
-label {
-  margin: 0 0.5em;
-  font-weight: bold;
-}
-
-code {
-  background-color: #eee;
-  padding: 2px 4px;
-  border-radius: 4px;
-  color: #304455;
 }
 </style>

@@ -1,4 +1,23 @@
-.divider {
-  border-top: 2px solid #cccccc;
-  margin-bottom: 1rem;
+.block {
+  width: 100%;
+
+  .divider {
+    border-top: 2px solid #cccccc;
+    margin-bottom: 1rem;
+  }
+
+  .title {
+    &:hover {
+      cursor: pointer;
+      color: #555;
+    }
+  }
+
+  .disabled {
+    color: #cccccc;
+  }
+
+  .hidden {
+    display: none;
+  }
 }

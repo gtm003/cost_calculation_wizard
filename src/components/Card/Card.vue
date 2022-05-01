@@ -1,51 +1,74 @@
 <script setup lang="ts">
+import { mainStore } from "../../store/index";
 import { formatPrice } from "../../helpers/formatPrice";
 import { Variant } from "../../models";
 import Checkbox from "../Checkbox/Checkbox.vue";
 import "./Card.scss";
 import Select from "../Select/Select.vue";
+import { ref } from "vue";
 
-defineProps<{ variant: Variant }>();
-
+const { variant, blockId } = defineProps<{
+  variant: Variant;
+  blockId: number;
+}>();
+const mainStoreI = mainStore();
+const totalPrice = ref(variant.price_default);
+const onChangePrice = (enlargeAmount: number) =>
+  (totalPrice.value += enlargeAmount);
+const onClickConfirmBtn = () => {
+  mainStoreI.data[blockId].selectedVariant = {
+    title: variant.title,
+    price: totalPrice.value,
+  };
+  if (blockId < mainStoreI.data.length - 1) {
+    mainStoreI.activeBlock = mainStoreI.data[blockId + 1].title;
+  }
+};
 </script>
 
 <template>
   <div class="card">
     <div class="head">
       <h1>{{ variant.title }}</h1>
-      <h1 class="price">{{ formatPrice(variant.price_default) }}</h1>
+      <h1 class="price">{{ formatPrice(totalPrice) }}</h1>
     </div>
     <div class="body">
-      <div class="description">
-        {{ variant.description }}
-      </div>
+      <div class="description" v-html="variant.description"></div>
       <div class="options">
-        <div v-if="variant.options.length" id="v-model-multiple-checkboxes">
-          <Checkbox v-for="option in variant.options" :option="option" />
+        <div
+          v-if="variant.options.length"
+          id="v-model-multiple-checkboxes"
+          v-on:change-price="totalPrice += 100"
+        >
+          <Checkbox
+            v-for="option in variant.options"
+            :key="option.title"
+            :option="option"
+            v-on:enlarge-text="onChangePrice"
+          />
         </div>
         <div v-if="variant.select.length">
-          <Select v-for="select in variant.select" :select="select" />
+          <Select
+            v-for="select in variant.select"
+            :key="select.title"
+            :select="select"
+          />
         </div>
-        <button class="button">Выбрано</button>
+        <button
+          :class="{
+            button: true,
+            disabled:
+              variant.title !== mainStoreI.data[blockId].selectedVariant.title,
+          }"
+          @click="onClickConfirmBtn"
+        >
+          {{
+            variant.title === mainStoreI.data[blockId].selectedVariant.title
+              ? "Выбрано"
+              : "Выбрать"
+          }}
+        </button>
       </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-a {
-  color: #42b983;
-}
-
-label {
-  margin: 0 0.5em;
-  font-weight: bold;
-}
-
-code {
-  background-color: #eee;
-  padding: 2px 4px;
-  border-radius: 4px;
-  color: #304455;
-}
-</style>

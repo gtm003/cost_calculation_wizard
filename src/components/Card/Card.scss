@@ -1,7 +1,7 @@
 .card {
   width: 780px;
   background: #f8f8f8;
-  border-left: 6px solid #CCCCCC;
+  border-left: 6px solid #cccccc;
   border-radius: 5px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
@@ -27,17 +27,20 @@
       justify-content: center;
       align-items: center;
       margin-left: 1.5rem;
-      border-left: 1px solid #CCCCCC;
+      border-left: 1px solid #cccccc;
       .button {
-        width: 190px;
+        width: 200px;
         height: 32px;
-        border-radius: 3px;
-        background: #2FCB5A;
+        border-radius: 5px;
+        background: #2fcb5a;
         border: none;
         color: #f8f8f8;
         font-size: 1.5rem;
         &:hover {
           cursor: pointer;
+        }
+        &.disabled {
+          background: #98abba;
         }
       }
     }
