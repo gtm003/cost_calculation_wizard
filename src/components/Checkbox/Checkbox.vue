@@ -4,11 +4,7 @@ import { OptionItem } from "../../models";
 import "./Checkbox.scss";
 
 defineProps<{ option: OptionItem }>();
-const checked=ref(false);
-
-function doThing(checked: boolean) {
-  console.log("Do thing", checked);
-}
+const checked = ref(false);
 </script>
 
 <template>
@@ -19,7 +15,9 @@ function doThing(checked: boolean) {
       :name="option.title"
       :value="option.price"
       v-model="checked"
-      v-on:change="$emit('enlarge-text', checked ? option?.price : - option?.price)"
+      v-on:change="
+        $emit('check-option', checked ? option?.price : -option?.price)
+      "
     />
     <label :for="option.title">{{ option.title }}</label>
   </div>

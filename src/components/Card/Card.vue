@@ -13,8 +13,12 @@ const { variant, blockId } = defineProps<{
 }>();
 const mainStoreI = mainStore();
 const totalPrice = ref(variant.price_default);
-const onChangePrice = (enlargeAmount: number) =>
+const onCheckOption = (enlargeAmount: number) =>
   (totalPrice.value += enlargeAmount);
+const onSelectOption = (enlargeAmount: number) => {
+  console.log(enlargeAmount);
+  totalPrice.value = variant.price_default + enlargeAmount;
+};
 const onClickConfirmBtn = () => {
   mainStoreI.data[blockId].selectedVariant = {
     title: variant.title,
@@ -44,7 +48,7 @@ const onClickConfirmBtn = () => {
             v-for="option in variant.options"
             :key="option.title"
             :option="option"
-            v-on:enlarge-text="onChangePrice"
+            v-on:check-option="onCheckOption"
           />
         </div>
         <div v-if="variant.select.length">
@@ -52,6 +56,7 @@ const onClickConfirmBtn = () => {
             v-for="select in variant.select"
             :key="select.title"
             :select="select"
+            v-on:select-option="onSelectOption"
           />
         </div>
         <button
