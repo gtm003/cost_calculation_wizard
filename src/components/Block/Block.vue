@@ -28,7 +28,7 @@ const handleClick = () => {
         v-for="variant in block.variants"
         :key="variant.title"
         :variant="variant"
-        :blockId="block.blockId"
+        :blockId="block.id"
       />
     </div>
   </div>

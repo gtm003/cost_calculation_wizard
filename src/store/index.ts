@@ -1,5 +1,11 @@
 import { defineStore } from "pinia";
 import data from "../assets/data.json";
+import { OptionItem, Block } from "../models";
+
+const UNSELECTED_VARIANT = {
+  title: "",
+  price: 0,
+};
 
 export const mainStore = defineStore("main", {
   state: () => {
@@ -7,27 +13,31 @@ export const mainStore = defineStore("main", {
       activeBlock: "Подключение",
       data: data.map((block, index) => ({
         ...block,
-        blockId: index,
-        selectedVariant: {
-          title: "",
-          price: 0,
-        },
+        id: index,
+        selectedVariant: UNSELECTED_VARIANT,
       })),
       totalPrice: 0,
-      count: 100,
     };
   },
 
-  getters: {},
+  getters: {
+    totalPrice(state) {
+      return state.data.reduce(
+        (acc, item) => acc + item.selectedVariant.price,
+        0
+      );
+    },
+  },
 
   actions: {
-    selectVariant(num: number): void {
-      // this access to the current container
-      //this.count += num;
-      //this.foo = "Hello";
-      // You can also use $ patch
-      // this.$patch({})
-      // this.$patch(state => {})
+    selectVariant(variant: OptionItem, blockId: number): void {
+      this.data[blockId].selectedVariant = variant;
+      if (this.data.some((block) => block.selectedVariant.title === "")) {
+        const nextBlock: Block = this.data.find(
+          (block) => block.selectedVariant.title === ""
+        );
+        this.activeBlock = nextBlock.title;
+      }
     },
   },
 });

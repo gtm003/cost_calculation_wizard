@@ -20,13 +20,13 @@ const onSelectOption = (enlargeAmount: number) => {
   totalPrice.value = variant.price_default + enlargeAmount;
 };
 const onClickConfirmBtn = () => {
-  mainStoreI.data[blockId].selectedVariant = {
-    title: variant.title,
-    price: totalPrice.value,
-  };
-  if (blockId < mainStoreI.data.length - 1) {
-    mainStoreI.activeBlock = mainStoreI.data[blockId + 1].title;
-  }
+  mainStoreI.selectVariant(
+    {
+      title: variant.title,
+      price: totalPrice.value,
+    },
+    blockId
+  );
 };
 </script>
 

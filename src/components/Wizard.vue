@@ -3,20 +3,16 @@ import { mainStore } from "../store/index";
 import Block from "./Block/Block.vue";
 import { formatPrice } from "../helpers/formatPrice";
 
-const { data } = mainStore();
+const mainStoreI = mainStore();
 </script>
 
 <template>
   <div class="wizard">
-    <Block v-for="block in data" :key="block.title" :block="block" />
+    <Block v-for="block in mainStoreI.data" :key="block.title" :block="block" />
     <button>
       <h2>ИТОГО К ОПЛАТЕ</h2>
       <h3>
-        {{
-          formatPrice(
-            data[0].selectedVariant.price + data[1].selectedVariant.price
-          )
-        }}
+        {{ formatPrice(mainStoreI.totalPrice) }}
       </h3>
     </button>
   </div>

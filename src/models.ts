@@ -18,7 +18,7 @@ export interface Variant {
 }
 
 export interface Block {
-  blockId: number;
+  id: number;
   title: string;
   variants: Variant[];
   selectedVariant: OptionItem;
