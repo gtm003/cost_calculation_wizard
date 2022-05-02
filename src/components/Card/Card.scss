@@ -1,14 +1,19 @@
 .card {
-  width: 780px;
+  width: 750px;
   background: #f8f8f8;
   border-left: 6px solid #cccccc;
   border-radius: 5px;
-  padding: 1.5rem;
   margin-bottom: 1.5rem;
+  &.disabled {
+    border-left: 6px solid #2fcb5a;
+  }
   .head {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    letter-spacing: -1.25px;
+    margin-bottom: 0.7rem;
+    padding: 0 1.5rem 0 2.5rem;
     .price {
       font-weight: normal;
     }
@@ -17,8 +22,12 @@
     display: flex;
     font-size: 1.5rem;
     .description {
-      white-space: pre-line;
-      width: 540px;
+      letter-spacing: -0.5px;
+      padding: 0 0 0 1.5rem;
+      width: 490px;
+      & > p {
+        margin: 0 0 1.2rem 0;
+      }
     }
     .options {
       width: 240px;
@@ -26,8 +35,10 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      margin-left: 1.5rem;
       border-left: 1px solid #cccccc;
+      p {
+        margin-top: 0;
+      }
       .button {
         width: 200px;
         height: 32px;
@@ -36,6 +47,7 @@
         border: none;
         color: #f8f8f8;
         font-size: 1.5rem;
+        margin-bottom: 1.5rem;
         &:hover {
           cursor: pointer;
         }

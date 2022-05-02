@@ -11,9 +11,9 @@ const mainStoreI = mainStore();
     <Block v-for="block in mainStoreI.data" :key="block.title" :block="block" />
     <button>
       <h2>ИТОГО К ОПЛАТЕ</h2>
-      <h3>
+      <h2 :style="{'font-weight': 500}">
         {{ formatPrice(mainStoreI.totalPrice) }}
-      </h3>
+      </h2>
     </button>
   </div>
 </template>
@@ -21,7 +21,7 @@ const mainStoreI = mainStore();
 <style scoped>
 .wizard {
   margin: 0 auto;
-  width: 780px;
+  width: 750px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -38,5 +38,8 @@ button {
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  padding-left: 2rem;
+  padding-right: 1rem;
+  letter-spacing: 2px;
 }
 </style>

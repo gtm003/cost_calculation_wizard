@@ -16,7 +16,6 @@ const totalPrice = ref(variant.price_default);
 const onCheckOption = (enlargeAmount: number) =>
   (totalPrice.value += enlargeAmount);
 const onSelectOption = (enlargeAmount: number) => {
-  console.log(enlargeAmount);
   totalPrice.value = variant.price_default + enlargeAmount;
 };
 const onClickConfirmBtn = () => {
@@ -31,13 +30,24 @@ const onClickConfirmBtn = () => {
 </script>
 
 <template>
-  <div class="card">
+  <div
+    :class="{
+      card: true,
+      disabled:
+        variant.title !== mainStoreI.data[blockId].selectedVariant.title,
+    }"
+  >
     <div class="head">
       <h1>{{ variant.title }}</h1>
       <h1 class="price">{{ formatPrice(totalPrice) }}</h1>
     </div>
     <div class="body">
-      <div class="description" v-html="variant.description"></div>
+      <div class="description">
+        <p
+          v-for="paragraf in variant.description.split('\n')"
+          v-html="paragraf"
+        ></p>
+      </div>
       <div class="options">
         <div
           v-if="variant.options.length"
