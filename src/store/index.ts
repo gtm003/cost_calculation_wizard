@@ -37,10 +37,9 @@ export const mainStore = defineStore("main", {
     selectVariant(variant: OptionItem, blockId: number): void {
       this.data[blockId].selectedVariant = variant;
       if (this.data.some((block) => block.selectedVariant.title === "")) {
-        const nextBlock: Block = this.data.find(
-          (block) => block.selectedVariant.title === ""
-        );
-        this.activeBlock = nextBlock.title;
+        this.activeBlock =
+          this.data.find((block) => block.selectedVariant.title === "")
+            ?.title ?? "";
       }
     },
   },
