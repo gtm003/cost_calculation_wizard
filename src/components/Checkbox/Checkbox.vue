@@ -3,7 +3,7 @@ import { ref } from "vue";
 import { OptionItem } from "../../models";
 import "./Checkbox.scss";
 
-defineProps<{ option: OptionItem }>();
+defineProps<{ option: OptionItem; disabled: boolean }>();
 const checked = ref(false);
 </script>
 
@@ -18,7 +18,15 @@ const checked = ref(false);
       v-on:change="
         $emit('check-option', checked ? option?.price : -option?.price)
       "
+      :disabled="disabled"
     />
-    <label :for="option.title">{{ option.title }}</label>
+    <label
+      :for="option.title"
+      :class="{
+        label: true,
+        disabled: disabled,
+      }"
+      >{{ option.title }}</label
+    >
   </div>
 </template>

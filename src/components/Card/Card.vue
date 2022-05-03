@@ -33,8 +33,7 @@ const onClickConfirmBtn = () => {
   <div
     :class="{
       card: true,
-      disabled:
-        variant.title !== mainStoreI.data[blockId].selectedVariant.title,
+      disabled: !mainStoreI.isActiveVariant(blockId, variant.title),
     }"
   >
     <div class="head">
@@ -59,6 +58,7 @@ const onClickConfirmBtn = () => {
             :key="option.title"
             :option="option"
             v-on:check-option="onCheckOption"
+            :disabled="mainStoreI.isActiveVariant(blockId, variant.title)"
           />
         </div>
         <div v-if="variant.select.length">
@@ -67,18 +67,12 @@ const onClickConfirmBtn = () => {
             :key="select.title"
             :select="select"
             v-on:select-option="onSelectOption"
+            :disabled="mainStoreI.isActiveVariant(blockId, variant.title)"
           />
         </div>
-        <button
-          :class="{
-            button: true,
-            disabled:
-              variant.title !== mainStoreI.data[blockId].selectedVariant.title,
-          }"
-          @click="onClickConfirmBtn"
-        >
+        <button class="button" @click="onClickConfirmBtn">
           {{
-            variant.title === mainStoreI.data[blockId].selectedVariant.title
+            mainStoreI.isActiveVariant(blockId, variant.title)
               ? "Выбрано"
               : "Выбрать"
           }}

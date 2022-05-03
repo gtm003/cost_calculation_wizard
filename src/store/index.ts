@@ -27,6 +27,10 @@ export const mainStore = defineStore("main", {
         0
       );
     },
+    isActiveVariant: (state) => {
+      return (blockId: number, titleVariant: string) =>
+        state.data[blockId].selectedVariant.title === titleVariant;
+    },
   },
 
   actions: {

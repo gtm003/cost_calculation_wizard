@@ -11,7 +11,7 @@ const mainStoreI = mainStore();
     <Block v-for="block in mainStoreI.data" :key="block.title" :block="block" />
     <button>
       <h2>ИТОГО К ОПЛАТЕ</h2>
-      <h2 :style="{'font-weight': 500}">
+      <h2 :style="{ 'font-weight': 500 }">
         {{ formatPrice(mainStoreI.totalPrice) }}
       </h2>
     </button>
