@@ -7,12 +7,12 @@
   }
 
   .title {
+    &.disabled {
+      color: #cccccc;
+    }
     &:hover {
       cursor: pointer;
       color: #555;
-    }
-    &.disabled {
-      color: #cccccc;
     }
   }
 

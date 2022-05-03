@@ -20,7 +20,7 @@ const mainStoreI = mainStore();
 
 <style scoped>
 .wizard {
-  margin: 0 auto;
+  margin: 5rem auto 0;
   width: 750px;
   display: flex;
   flex-direction: column;
