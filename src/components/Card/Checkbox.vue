@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { OptionItem } from "../../models";
-import "./Checkbox.scss";
+//import "./Checkbox.scss";
 
 defineProps<{ option: OptionItem; disabled: boolean }>();
 const checked = ref(false);
@@ -30,3 +30,22 @@ const checked = ref(false);
     >
   </div>
 </template>
+
+<style scoped lang="scss">
+.checkbox-wrapper {
+  width: 190px;
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+  height: 2rem;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  .label {
+    padding-left: 1rem;
+    font-size: 1.5rem;
+    font-weight: normal;
+    &.disabled {
+      color: #cccccc;
+    }
+  }
+}
+</style>

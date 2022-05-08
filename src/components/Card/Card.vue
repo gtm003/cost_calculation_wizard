@@ -2,9 +2,8 @@
 import { mainStore } from "../../store/index";
 import { formatPrice } from "../../helpers/formatPrice";
 import { Variant } from "../../models";
-import Checkbox from "../Checkbox/Checkbox.vue";
-import "./Card.scss";
-import Select from "../Select/Select.vue";
+import Checkbox from "./Checkbox.vue";
+import Select from "./Select.vue";
 import { ref } from "vue";
 
 const { variant, blockId } = defineProps<{
@@ -81,3 +80,68 @@ const onClickConfirmBtn = () => {
     </div>
   </div>
 </template>
+
+<style scoped lang="scss">
+.card {
+  width: 750px;
+  background: #f8f8f8;
+  border-left: 6px solid #cccccc;
+  border-radius: 5px;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+
+  .button {
+    width: 200px;
+    height: 32px;
+    border-radius: 5px;
+    background: #2fcb5a;
+    border: none;
+    color: #f8f8f8;
+    font-size: 1.5rem;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &.disabled {
+    border-left: 6px solid #2fcb5a;
+    .button {
+      background: #98abba;
+    }
+  }
+  .head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    letter-spacing: -1.25px;
+    margin-bottom: 0.7rem;
+    padding: 0 1.5rem 0 2.5rem;
+    .price {
+      font-weight: normal;
+    }
+  }
+  .body {
+    display: flex;
+    font-size: 1.5rem;
+    .description {
+      letter-spacing: -0.5px;
+      padding: 0 0 0 1.5rem;
+      width: 490px;
+      & > p {
+        margin: 0 0 1.2rem 0;
+      }
+    }
+    .options {
+      width: 240px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-left: 1px solid #cccccc;
+      p {
+        margin-top: 0;
+      }
+    }
+  }
+}
+</style>

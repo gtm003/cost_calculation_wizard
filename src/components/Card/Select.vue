@@ -2,8 +2,6 @@
 import { ref } from "vue";
 import { Select } from "../../models";
 
-import "./Select.scss";
-
 const { disabled, select } = defineProps<{
   select: Select;
   disabled: boolean;
@@ -25,3 +23,18 @@ const selected = ref(select.items[0].price);
     </select>
   </div>
 </template>
+
+<style scoped lang="scss">
+.select-wrapper {
+  width: 200px;
+  font-size: 1.2rem;
+  border-radius: 3px;
+  margin-bottom: 1rem;
+  select {
+    width: 200px;
+    height: 32px;
+    padding-left: 1rem;
+    font-size: 1.5rem;
+  }
+}
+</style>
