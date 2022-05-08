@@ -3,7 +3,6 @@ import { mainStore } from "../../store/index";
 import { storeToRefs } from "pinia";
 import { Block } from "../../models";
 import Card from "../Card/Card.vue";
-import "./Block.scss";
 
 const mainStoreI = mainStore();
 const { activeBlock } = storeToRefs(mainStoreI);
@@ -33,3 +32,26 @@ const handleClick = () => {
     </div>
   </div>
 </template>
+
+<style scoped>
+.block {
+  width: 100%;
+}
+.divider {
+  border-top: 2px solid #cccccc;
+  margin-bottom: 1rem;
+}
+
+.title.disabled {
+  color: #cccccc;
+}
+
+.title:hover {
+  cursor: pointer;
+  color: #555;
+}
+
+.hidden {
+  display: none;
+}
+</style>
