@@ -10,7 +10,7 @@ const UNSELECTED_VARIANT = {
 export const mainStore = defineStore("main", {
   state: () => {
     return {
-      activeBlock: "Подключение",
+      activeBlock: data[0].title,
       data: data.map((block, index) => ({
         ...block,
         id: index,
